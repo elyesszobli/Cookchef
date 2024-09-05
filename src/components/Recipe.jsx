@@ -1,16 +1,26 @@
-import styles from "./Recipe.module.scss"
+import { useState } from 'react';
+import styles from './Recipe.module.scss';
 
-function Recipe(){
-    return(
-        <div className={styles.recipe}>
-            <div className={styles.imageContainer}>
-                <img src="https://idee-recette.com/wp-content/uploads/2021/06/3737.jpg" alt="recipe" />
-            </div>
-            <div className={`${styles.recipeTitle} d-flex flex-row align-items-center justify-content-center`}>
-                <h3>Lablabi Tunisien</h3>
-            </div>
-        </div>
-    );
+function Recipe({ title, image }) {
+  const [liked, setLiked] = useState(false);
+
+  function handleClick() {
+    setLiked(!liked);
+  }
+
+  return (
+    <div onClick={handleClick} className={styles.recipe}>
+      <div className={styles.imageContainer}>
+        <img src={image} alt={title} />
+      </div>
+      <div
+        className={`${styles.recipeTitle} d-flex flex-column justify-content-center align-items-center`}
+      >
+        <h3 className="mb-10">{title}</h3>
+        <i className={`fa-solid fa-heart ${liked ? 'text-primary' : ''}`}></i>
+      </div>
+    </div>
+  );
 }
 
 export default Recipe;
